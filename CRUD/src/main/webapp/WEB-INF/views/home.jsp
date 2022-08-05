@@ -6,12 +6,12 @@
 	<title>Home</title>
 </head>
 <body>
-<form action="listAll" method="get">
-<button type="submit">CRUD게시판 가기</button>
-<h1>
-	Hello world!  
-</h1>
-<P>  The time on the server is ${serverTime}. </P>
-</form>
+	
+	<h1>home Pages</h1>
+	<h2>Comento Prj</h2>
+	
+	<form action="/listAll" method="get">
+		<button type="submit">CRUD 게시판 가기</button>		
+	</form>
+	
 </body>
-</html>

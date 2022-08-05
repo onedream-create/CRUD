@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.crud.mapper.BoardMapper">
+	<select id="listAll" resultType="com.crud.domain.BoardVO">
+		select * 
+		from cmt_board 
+		where bno > 0
+		order by bno desc, regdate desc
+	</select>
+	
+	<insert id="create">
+		insert into cmt_board (bno, title, content, writer, viewcnt)
+		values(seq_board.nextval, #{title}, #{content}, #{writer}, #{viewcnt})
+	</insert>
+	
+	<select id="read" resultType="com.crud.domain.BoardVO">
+		select *
+		from cmt_board
+		where bno = #{bno}
+	</select>
+	
+	<delete id="delete">
+		delete from cmt_board
+		where bno = #{bno}
+	</delete>
+	
+	<update id="update">
+		update cmt_board
+		set title = #{title},
+			content = #{content},
+			writer = #{writer},
+			regdate = sysdate
+		where bno = #{bno}
+	</update>
+</mapper>  

@@ -4,35 +4,45 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import com.crud.domain.BoardVO;
-import com.crud.persistence.BoardDAO;
+import org.springframework.stereotype.Service;
 
-public class BoardServiceImpl {
-	@Inject
-	  private BoardDAO dao;
+import com.crud.domain.BoardVO;
+import com.crud.dao.BoardDAO;
+
+import lombok.ToString;
+import lombok.extern.log4j.Log4j;
+
+@Service
+@Log4j
+@ToString
+public class BoardServiceImpl implements BoardService {
 	
-//	@Override
-//	public void regist(BoardVO board) throws Exception {
-//		dao.create(board);
-//	}
-//	
-//	@Override
-//	public BoardVO read(Integer bno) throws Exception {
-//		return dao.read(bno);
-//	}
-//	
-//	@Override
-//	public void modify(BoardVO board) throws Exception {
-//		dao.update(board);
-//	}
-//	
-//	@Override
-//	public void remove(Integer bno) throws Exception {
-//		dao.delete(bno);
-//	}
-//	
-//	@Override
-//	public List<BoardVO> listAll() throws Exception {
-//		return dao.listAll();
-	//}
+	@Inject
+	private BoardDAO boardDAO;
+	
+	@Override
+	public void register(BoardVO board) throws Exception {
+		boardDAO.create(board);
+	}
+
+	@Override
+	public BoardVO read(Integer no) throws Exception {
+		boardDAO.updateHits(no);
+		return boardDAO.read(no);
+	}
+
+	@Override
+	public void modify(BoardVO board) throws Exception {
+		boardDAO.update(board);
+	}
+
+	@Override
+	public void remove(Integer no) throws Exception {
+		boardDAO.delete(no);
+	}
+
+	@Override
+	public List<BoardVO> listAll() throws Exception {
+		return boardDAO.listAll();
+	}
 }
